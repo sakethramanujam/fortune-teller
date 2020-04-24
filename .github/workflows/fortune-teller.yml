@@ -1,21 +1,19 @@
 name: Fortune Teller
 on: push
 
-
 jobs:
-    fortune=telling:
-        runs-on: ubuntu-18.04
-        steps:
-            - name: Install Fortune
-              run: |
-                sudo apt-get install fortune-mod
-            - name: Speak out fortune
-              env:
-                url: ${{ secrets.slack_webook_url }}
-              run: |
-                message=$(fortune)
-                curl -X POST --data-urlencode "payload={\"username\": \"fortune-teller\", \"text\": \"$message\", \"icon_emoji\": \":ghost:\"}" \
-                $url
-
-
-
+  fortune_telling:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Fortune
+        run: |
+          sudo apt install fortune-mod
+          sudo apt-get install --no-install-recommends curl
+      - name: Speak out fortune
+        env:
+          url: ${{ secrets.slack_webhook_url }}
+        run: |
+          export PATH=$PATH:/usr/games
+          msg=$(fortune)
+          echo $msg
+          curl -X POST --data-urlencode "payload={\"username\": \"fortune-teller\", \"text\": \"$msg\"}" $url
