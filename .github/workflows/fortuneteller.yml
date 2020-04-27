@@ -1,7 +1,7 @@
 name: Fortune Teller
-on: push
-  #schedule:
-    #- cron: '0 8 * * *'
+on: 
+  schedule:
+    - cron: '0 2 * * *'
 
 jobs:
   fortune_telling:
