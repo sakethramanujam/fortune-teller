@@ -1,7 +1,7 @@
 name: Fortune Teller
-on:
-  schedule:
-    - cron: '0 6 * * *'
+on: push
+  # schedule:
+   # - cron: '0 6 * * *'
 
 jobs:
   fortune_telling:
@@ -16,6 +16,6 @@ jobs:
           url: ${{ secrets.slack_webhook_url }}
         run: |
           export PATH=$PATH:/usr/games
-          msg=$(fortune) | tr -d '"'
+          msg=$(fortune)
           echo $msg
           curl -X POST -H "Content-Type: application/json" -d "{\"username\": \"fortune-teller\", \"text\": \"$msg\"}" $url
