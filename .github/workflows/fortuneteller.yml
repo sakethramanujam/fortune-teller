@@ -1,8 +1,7 @@
 name: Fortune Teller
 on: 
-  schedule:
-   - cron: '0 6 * * *'
-
+  push:
+    branches: master
 jobs:
   fortune_telling:
     runs-on: ubuntu-latest
